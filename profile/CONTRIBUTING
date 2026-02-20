@@ -1,0 +1,32 @@
+# Contributing to SPZ Ecosystem
+
+Thank you for your interest in contributing to the SPZ Ecosystem! We welcome contributions from everyone, regardless of their background or experience level.
+
+## How to Contribute
+
+### 1. Reporting Bugs
+If you find a bug, please open an issue on the relevant repository. When reporting a bug, please include:
+- A clear and descriptive title
+- Steps to reproduce the issue
+- Expected behavior
+- Actual behavior
+- Any relevant logs, screenshots, or system information
+
+### 2. Requesting Features
+If you have an idea for a new feature or improvement, please open an issue to discuss it first. This helps us understand the use case and prioritize the work.
+
+### 3. Submitting Code Changes
+1.  **Fork the repository** you want to contribute to.
+2.  **Create a new branch** for your changes: `git checkout -b feature/my-new-feature`
+3.  **Make your changes** and commit them with a descriptive message.
+4.  **Push your branch** to your fork: `git push origin feature/my-new-feature`
+5.  **Open a pull request** to the main branch of the original repository.
+
+### 4. Improving Documentation
+Documentation is a critical part of our project. If you see an area that can be improved, please submit a pull request with your changes.
+
+## Code of Conduct
+All contributors are expected to adhere to our [Code of Conduct](./CODE_OF_CONDUCT.md).
+
+## License
+By contributing to the SPZ Ecosystem, you agree that your contributions will be licensed under the MIT License.
