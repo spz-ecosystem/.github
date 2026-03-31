@@ -1,159 +1,159 @@
-# SPZ 生态系统
+# SPZ Ecosystem
 
-> 围绕 Khronos SPZ 3D Gaussian Splatting 压缩规范的开源工具链与合规验证体系
+> Open-source toolchain and compliance verification system around the Khronos SPZ 3D Gaussian Splatting compression specification
 
-## 核心项目
+## Core Projects
 
-### spz2glb（v2.0.1 稳定版）
+### spz2glb (v2.0.1 Stable)
 
-**职责边界**：只做两件事——**SPZ→GLB 格式封装**与 **GLB 分发交付链路**
+**Responsibility Boundary**: Does only two things—**SPZ→GLB format packaging** and **GLB delivery workflow**
 
-- **核心定位**：无损打包（SPZ 压缩流原封不动存入 GLB）
-- **在线演示**：https://openclaw-spz-3gt7x2sya7c10ef2-1355411679.tcloudbaseapp.com/
-- **仓库地址**：https://github.com/spz-ecosystem/spz2glb
-- **关键特性**：
-  - WASM 内存与 API 能力（预分配、显式释放、统计与双档配置）
-  - 双端协同：浏览器侧轻量预览/快速校验；本地 CLI 重任务转换/批处理/深度验证
-  - 三层验证：结构验证 / 无损验证 / 解码一致性验证
+- **Core Positioning**: Lossless packaging (SPZ compressed stream stored unchanged in GLB)
+- **Live Demo**: https://openclaw-spz-3gt7x2sya7c10ef2-1355411679.tcloudbaseapp.com/
+- **Repository**: https://github.com/spz-ecosystem/spz2glb
+- **Key Features**:
+  - WASM memory and API capabilities (pre-allocation, explicit release, statistics and dual-tier configuration)
+  - Dual-end synergy: browser-side lightweight preview/quick validation; local CLI for heavy-duty conversion/batch processing/deep verification
+  - Three-layer verification: structure verification / lossless verification / decoding consistency verification
 
-### spz_gatekeeper（v2.0.1 稳定版）
+### spz_gatekeeper (v2.0.1 Stable)
 
-**职责边界**：仅做 L2 的 SPZ 合法性检查器，审计 header、flags 和 TLV trailer 扩展，同时不破坏原始 SPZ 的基础解码行为
+**Responsibility Boundary**: L2-only SPZ legality checker for validating headers, flags, and TLV trailer extensions without changing baseline SPZ decoding behavior
 
-- **核心定位**：SPZ 扩展合规审查与兼容性验证
-- **仓库地址**：https://github.com/spz-ecosystem/spz_gatekeeper
-- **关键特性**：
-  - 校验 SPZ header：magic、version、点数、SH degree、flags、reserved
-  - 校验 base payload 之后的 TLV trailer 布局
-  - 校验已知厂商扩展（如 Adobe Safe Orbit Camera `0xADBE0002`）
-  - 对更高版本 SPZ 发出 warning，继续 best-effort 校验
+- **Core Positioning**: SPZ extension compliance review and compatibility validation
+- **Repository**: https://github.com/spz-ecosystem/spz_gatekeeper
+- **Key Features**:
+  - Validates SPZ header: magic, version, point count, SH degree, flags, reserved
+  - Validates TLV trailer layout after base payload
+  - Validates known vendor extensions (e.g., Adobe Safe Orbit Camera `0xADBE0002`)
+  - Warns on higher SPZ versions, continues best-effort validation
 
 ---
 
-## 二维码原生分发体系（实验性）
+## QR-Code Native Distribution System (Experimental)
 
-> **实验性声明**：这是一套实验性的 3D 资产分发体系，旨在为社区面临的**文件体积庞大难以传输**、**存储成本高昂**、**标准碎片化导致兼容性混乱**、**缺乏轻量化即时分发手段**等问题，提供一种以二维码为统一载体的实验性解法。
+> **Experimental Declaration**: This is an experimental 3D asset distribution system, aiming to provide the community with an experimental solution using QR codes as a unified carrier for issues such as **large file sizes difficult to transfer**, **high storage costs**, **fragmented standards causing compatibility chaos**, and **lack of lightweight instant distribution means**.
 
-以二维码为统一载体的 SPZ/GLB 全链路分发与验证体系：
+A QR-code-based full-chain SPZ/GLB distribution and verification system:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                       二维码原生分发体系架构                               │
+│                    QR-Code Native Distribution Architecture              │
 ├─────────────────────────────────────────────────────────────────────────┤
-│                                                                         │
-│    数据准入层            分发授权层              消费转换层                │
-│    ┌──────────┐       ┌──────────┐        ┌──────────┐                 │
-│    │  SPZ     │       │  门卫    │        │  spz2glb │                 │
-│    │  数据集  │──────→│  授权    │───────→│  网页端  │                 │
-│    └──────────┘       └──────────┘        └──────────┘                 │
-│                             │                      │                   │
-│                             ↓                      ↓                   │
-│                        生成带授权                扫码即转换              │
-│                        信息的二维码              WASM 无损打包           │
-│                             │                      │                   │
-│                             └──────────────────────┘                   │
-│                                           │                            │
-│                                           ↓                            │
-│                                    GLB 下载交付                        │
-│                                    （或二维码转发）                      │
-│                                                                         │
+│                                                                          │
+│    Data Admission Layer      Distribution Auth Layer    Consumption      │
+│    ┌──────────┐           ┌──────────┐           ┌──────────┐           │
+│    │  SPZ     │           │ Gatekeeper│           │  spz2glb │           │
+│    │ Dataset  │──────────→│  Auth    │───────────→│  Web     │           │
+│    └──────────┘           └──────────┘           └──────────┘           │
+│                                │                        │               │
+│                                ↓                        ↓               │
+│                          Generate QR with           Scan-to-Convert     │
+│                          authorization              WASM lossless       │
+│                                │                    packaging            │
+│                                └────────────────────────┘               │
+│                                          │                              │
+│                                          ↓                              │
+│                                   GLB Download Delivery                 │
+│                                   (or QR re-distribution)               │
+│                                                                          │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 体系流程
+### System Workflow
 
-| 阶段 | 职责 | 载体 | 实现状态 |
-|------|------|------|----------|
-| **准入校验** | 门卫对 SPZ 进行 L2 合法性检查 | SPZ 文件 | ✅ `spz_gatekeeper check-spz` |
-| **授权分发** | 合法 SPZ/GLB 生成可分发二维码 | 二维码 | 🚧 门卫内置生成（规划中） |
-| **扫码校验** | 门卫校验二维码中的授权信息 | 二维码 | 🚧 `spz_gatekeeper verify-qr`（规划中） |
-| **扫码转换** | spz2glb 网页端读取二维码并转换 | 二维码→SPZ→GLB | 🚧 v2.1 版本支持 |
-| **二维码转发** | GLB 也可通过二维码二次分发 | 二维码 | 🚧 实验性支持 |
-| **扫码即渲染** | 浏览器直接渲染（远期探索） | 二维码→渲染 | 🔬 WebGL/Three.js（实验性） |
+| Phase | Responsibility | Carrier | Status |
+|-------|----------------|---------|--------|
+| **Admission Check** | Gatekeeper L2 legality check | SPZ file | ✅ `spz_gatekeeper check-spz` |
+| **Authorized Distribution** | Valid SPZ/GLB generates distributable QR | QR Code | 🚧 Gatekeeper built-in generation (planned) |
+| **Scan-to-Verify** | Gatekeeper validates authorization in QR | QR Code | 🚧 `spz_gatekeeper verify-qr` (planned) |
+| **Scan-to-Convert** | spz2glb web reads QR and converts | QR→SPZ→GLB | 🚧 v2.1 support |
+| **QR Re-distribution** | GLB can also be redistributed via QR | QR Code | 🚧 Experimental support |
+| **Scan-to-Render** | Browser direct rendering (future exploration) | QR→Render | 🔬 WebGL/Three.js (experimental) |
 
-### 核心设计
+### Core Design
 
-- **扫码即校验**：门卫在二维码中嵌入 SPZ 文件哈希与合规签名，扫码时先校验后转换，确保数据来源可信
-- **扫码即转换**：spz2glb 网页端识别二维码，自动拉取 SPZ 并执行 WASM 无损打包为 GLB
-- **二维码转发**：生成的 GLB 可再次封装为二维码，实现资产的链式轻量分发
-- **数据集准入基准**：所有进入生态的 SPZ 数据必须通过门卫校验并生成授权二维码
+- **Scan-to-Verify**: Gatekeeper embeds SPZ file hash and compliance signature in QR; scan first validates then converts, ensuring data source trustworthiness
+- **Scan-to-Convert**: spz2glb web recognizes QR, automatically pulls SPZ and executes WASM lossless packaging to GLB
+- **QR Re-Distribution**: Generated GLB can be repackaged as QR, enabling chain lightweight distribution of assets
+- **Dataset Admission Baseline**: All SPZ data entering the ecosystem must pass gatekeeper validation and generate authorized QR
 
-### 解决的社区痛点
+### Community Pain Points Addressed
 
-| 痛点 | 传统方案 | 二维码原生体系 |
-|------|----------|----------------|
-| **文件体积庞大，传输困难** | 依赖云盘/邮件传输大文件 | 二维码轻量分享，扫码即下载转换 |
-| **存储成本高昂** | 需长期托管大文件 | 二维码指向对象存储，按需拉取 |
-| **标准碎片化，兼容性混乱** | 多种格式扩展各自为政 | 门卫统一校验，合规数据才生成二维码 |
-| **缺乏即时分发手段** | 安装专用软件或插件 | 微信/小程序扫码即用，无需安装 |
-| **移动端体验差** | 大文件下载崩溃、渲染卡顿 | WASM 预检内存预算，超限引导至 CLI |
+| Pain Point | Traditional Solution | QR-Code Native System |
+|------------|---------------------|----------------------|
+| **Large files, difficult transfer** | Cloud drive/email large file transfer | QR lightweight sharing, scan to download/convert |
+| **High storage costs** | Long-term hosting of large files | QR points to object storage, on-demand pull |
+| **Fragmented standards, compatibility chaos** | Various format extensions work independently | Gatekeeper unified validation, only compliant data generates QR |
+| **Lack of instant distribution** | Install dedicated software or plugins | WeChat/Mini Program scan to use, no install needed |
+| **Poor mobile experience** | Large file download crashes, rendering lag | WASM pre-check memory budget,超限引导至 CLI |
 
-### 技术约束
+### Technical Constraints
 
-- **HTTPS 直链**：二维码指向的 SPZ/GLB 文件必须配置 CORS
-- **移动端内存预算**：32MB 档位，超限文件引导至 CLI 处理
-- **状态**：实验性开发中，v2.1 版本实现扫码即转换，远期探索扫码即渲染
-
----
-
-## 快速导航
-
-| 项目 | 文档 | 演示 |
-|------|------|------|
-| spz2glb | [Wiki](https://github.com/spz-ecosystem/spz2glb/wiki) | [在线站点](https://openclaw-spz-3gt7x2sya7c10ef2-1355411679.tcloudbaseapp.com/) |
-| spz_gatekeeper | [README](https://github.com/spz-ecosystem/spz_gatekeeper/blob/main/README-zh.md) | CLI 工具 |
+- **HTTPS Direct Link**: SPZ/GLB files pointed to by QR must have CORS configured
+- **Mobile Memory Budget**: 32MB tier, files exceeding limit are directed to CLI processing
+- **Status**: Experimental development, v2.1 implements scan-to-convert, future exploration of scan-to-render
 
 ---
 
-## 关联项目
+## Quick Navigation
 
-- [spz_gatekeeper](https://github.com/spz-ecosystem/spz_gatekeeper) -  SPZ 合法性检查器
-- [spz2glb](https://github.com/spz-ecosystem/spz2glb) - SPZ→GLB 格式封装与分发工具
-- [spz-entropy](https://github.com/spz-ecosystem/spz-entropy) - SPZ 熵编码优化（开发中）
-- [KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/pull/2490) - Khronos 官方 3D Gaussian Splatting glTF 扩展
-- [KHR_gaussian_splatting_compression_spz_2](https://github.com/KhronosGroup/glTF/pull/2531) - Khronos SPZ_2 压缩扩展提案（当前草案）
-
----
-
-## 关于 SPZ 生态系统
-
-SPZ 生态系统致力于开发和维护 Khronos SPZ 3D Gaussian Splatting 压缩规范的开源工具。我们的目标是让高质量的 3D 内容压缩在整个 3D 图形和 AIGC 行业中变得易于访问、高效且兼容。
-
-**设计原则**：
-- **单一职责**：每个工具只做明确边界内的事
-- **可验证**：所有产出必须通过标准化验证
-- **双端协同**：浏览器侧轻量交互，CLI 侧重任务处理
-- **二维码原生**：以二维码为统一分发入口，实现准入-授权-消费全链路闭环，为 3D 资产分发困境提供实验性解法
+| Project | Documentation | Demo |
+|---------|---------------|------|
+| spz2glb | [Wiki](https://github.com/spz-ecosystem/spz2glb/wiki) | [Live Site](https://openclaw-spz-3gt7x2sya7c10ef2-1355411679.tcloudbaseapp.com/) |
+| spz_gatekeeper | [README](https://github.com/spz-ecosystem/spz_gatekeeper/blob/main/README.md) | CLI Tool |
 
 ---
 
-## 社区指南
+## Related Projects
 
-我们致力于营造一个开放、包容和协作的社区。所有参与者都应遵守我们的[行为准则](https://github.com/spz-ecosystem/.github/blob/main/CODE_OF_CONDUCT.md)。
-
-## 如何贡献
-
-我们欢迎大家的贡献！无论您是开发者、研究人员还是行业合作伙伴，都有多种方式参与其中：
-
-1. **代码贡献**：向我们的核心仓库提交拉取请求
-2. **问题报告**：通过报告错误或请求功能来帮助我们改进
-3. **文档**：改进我们的指南、教程和 API 参考
-4. **社区支持**：在讨论中回答问题并帮助新贡献者
-
-如需详细说明，请阅读我们的[贡献指南](https://github.com/spz-ecosystem/.github/blob/main/CONTRIBUTING.md)。
+- [spz_gatekeeper](https://github.com/spz-ecosystem/spz_gatekeeper) - SPZ legality checker
+- [spz2glb](https://github.com/spz-ecosystem/spz2glb) - SPZ→GLB format packaging and distribution tool
+- [spz-entropy](https://github.com/spz-ecosystem/spz-entropy) - SPZ entropy encoding optimization (in development)
+- [KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/pull/2490) - Khronos official 3D Gaussian Splatting glTF extension
+- [KHR_gaussian_splatting_compression_spz_2](https://github.com/KhronosGroup/glTF/pull/2531) - Khronos SPZ_2 compression extension proposal (current draft)
 
 ---
 
-## 联系与合作
+## About SPZ Ecosystem
 
-- **组织邮箱**：175851233+gugu23456789@users.noreply.github.com
-- **Khronos 规范 PR**：[KhronosGroup/glTF#2534](https://github.com/KhronosGroup/glTF/pull/2534)
-- **维护者**：[gugu23456789](https://github.com/gugu23456789)
+SPZ Ecosystem is dedicated to developing and maintaining open-source tools for the Khronos SPZ 3D Gaussian Splatting compression specification. Our goal is to make high-quality 3D content compression accessible, efficient, and compatible across the 3D graphics and AIGC industries.
 
-我们积极寻求与行业合作伙伴合作，尤其是从事 3D AIGC、数字孪生和实时渲染领域的合作伙伴。如果您有兴趣成为核心维护者或参与项目，请联系我们！
+**Design Principles**:
+- **Single Responsibility**: Each tool does only what is within its defined boundary
+- **Verifiable**: All output must pass standardized validation
+- **Dual-End Synergy**: Browser-side lightweight interaction, CLI for heavy task processing
+- **QR-Code Native**: QR codes as the unified distribution entry point, achieving full-chain closed loop of admission-authorization-consumption, providing an experimental solution for 3D asset distribution dilemmas
 
 ---
 
-## 开源协议
+## Community Guidelines
 
-该组织由 SPZ 生态系统社区维护，并采用 [MIT 许可证](https://github.com/spz-ecosystem/.github/blob/main/LICENSE) 授权。
+We are committed to fostering an open, inclusive, and collaborative community. All participants should abide by our [Code of Conduct](https://github.com/spz-ecosystem/.github/blob/main/CODE_OF_CONDUCT.md).
+
+## How to Contribute
+
+We welcome contributions from everyone! Whether you are a developer, researcher, or industry partner, there are many ways to get involved:
+
+1. **Code Contributions**: Submit pull requests to our core repositories
+2. **Issue Reporting**: Help us improve by reporting bugs or requesting features
+3. **Documentation**: Improve our guides, tutorials, and API references
+4. **Community Support**: Answer questions in discussions and help new contributors
+
+For detailed instructions, please read our [Contributing Guide](https://github.com/spz-ecosystem/.github/blob/main/CONTRIBUTING.md).
+
+---
+
+## Contact & Collaboration
+
+- **Organization Email**: 175851233+gugu23456789@users.noreply.github.com
+- **Khronos Specification PR**: [KhronosGroup/glTF#2534](https://github.com/KhronosGroup/glTF/pull/2534)
+- **Maintainer**: [gugu23456789](https://github.com/gugu23456789)
+
+We actively seek collaboration with industry partners, especially those working in 3D AIGC, digital twin, and real-time rendering fields. If you are interested in becoming a core maintainer or participating in the project, please contact us!
+
+---
+
+## License
+
+This organization is maintained by the SPZ Ecosystem community and licensed under the [MIT License](https://github.com/spz-ecosystem/.github/blob/main/LICENSE).
