@@ -9,8 +9,8 @@
 **Responsibility Boundary**: Does only two things—**SPZ→GLB format packaging** and **GLB delivery workflow**
 
 - **Core Positioning**: Lossless packaging (SPZ compressed stream stored unchanged in GLB)
-- **Live Demo**: https://openclaw-spz-3gt7x2sya7c10ef2-1355411679.tcloudbaseapp.com/
 - **Repository**: https://github.com/spz-ecosystem/spz2glb
+- **Live Demo**: [GitHub Pages](https://spz-ecosystem.github.io/spz2glb/)
 - **Key Features**:
   - WASM memory and API capabilities (pre-allocation, explicit release, statistics and dual-tier configuration)
   - Dual-end synergy: browser-side lightweight preview/quick validation; local CLI for heavy-duty conversion/batch processing/deep verification
@@ -22,6 +22,9 @@
 
 - **Core Positioning**: SPZ extension compliance review and compatibility validation
 - **Repository**: https://github.com/spz-ecosystem/spz_gatekeeper
+- **Live Demo**:
+  - GitHub Pages: https://spz-ecosystem.github.io/spz_gatekeeper/
+  - CloudBase (China CDN): https://openclaw-spz-3gt7x2sya7c10ef2-1355411679.tcloudbaseapp.com/
 - **Key Features**:
   - Validates SPZ header: magic, version, point count, SH degree, flags, reserved
   - Validates TLV trailer layout after base payload
@@ -100,8 +103,8 @@ A QR-code-based full-chain SPZ/GLB distribution and verification system:
 
 | Project | Documentation | Demo |
 |---------|---------------|------|
-| spz2glb | [Wiki](https://github.com/spz-ecosystem/spz2glb/wiki) | [Live Site](https://openclaw-spz-3gt7x2sya7c10ef2-1355411679.tcloudbaseapp.com/) |
-| spz_gatekeeper | [README](https://github.com/spz-ecosystem/spz_gatekeeper/blob/main/README.md) | CLI Tool |
+| spz2glb | [Wiki](https://github.com/spz-ecosystem/spz2glb/wiki) | [GitHub Pages](https://spz-ecosystem.github.io/spz2glb/) |
+| spz_gatekeeper | [README](https://github.com/spz-ecosystem/spz_gatekeeper/blob/main/README.md) | [GitHub Pages](https://spz-ecosystem.github.io/spz_gatekeeper/) / [CloudBase](https://openclaw-spz-3gt7x2sya7c10ef2-1355411679.tcloudbaseapp.com/) |
 
 ---
 
