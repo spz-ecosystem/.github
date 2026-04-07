@@ -70,7 +70,7 @@ A QR-code-based full-chain SPZ/GLB distribution and verification system:
 | **Admission Check** | Gatekeeper L2 legality check | SPZ file | ✅ `spz_gatekeeper check-spz` |
 | **Authorized Distribution** | Valid SPZ/GLB generates distributable QR | QR Code | 🚧 Gatekeeper built-in generation (planned) |
 | **Scan-to-Verify** | Gatekeeper validates authorization in QR | QR Code | 🚧 `spz_gatekeeper verify-qr` (planned) |
-| **Scan-to-Convert** | spz2glb web reads QR and converts | QR→SPZ→GLB | 🚧 v2.1 support |
+| **Scan-to-Convert** | spz2glb web reads QR and converts | QR→SPZ→GLB | 🚧 v3.0 experimental support (planned) |
 | **QR Re-distribution** | GLB can also be redistributed via QR | QR Code | 🚧 Experimental support |
 | **Scan-to-Render** | Browser direct rendering (future exploration) | QR→Render | 🔬 WebGL/Three.js (experimental) |
 
@@ -95,7 +95,7 @@ A QR-code-based full-chain SPZ/GLB distribution and verification system:
 
 - **HTTPS Direct Link**: SPZ/GLB files pointed to by QR must have CORS configured
 - **Mobile Memory Budget**: 32MB tier, files exceeding limit are directed to CLI processing
-- **Status**: Experimental development, v2.1 implements scan-to-convert, future exploration of scan-to-render
+- **Status**: Experimental development, v3.0 experimental release plans scan-to-convert, with scan-to-render as a future exploration
 
 ---
 
@@ -105,6 +105,12 @@ A QR-code-based full-chain SPZ/GLB distribution and verification system:
 |---------|---------------|------|
 | spz2glb | [Wiki](https://github.com/spz-ecosystem/spz2glb/wiki) | [GitHub Pages](https://spz-ecosystem.github.io/spz2glb/) |
 | spz_gatekeeper | [README](https://github.com/spz-ecosystem/spz_gatekeeper/blob/main/README.md) | [GitHub Pages](https://spz-ecosystem.github.io/spz_gatekeeper/) / [CloudBase](https://openclaw-spz-3gt7x2sya7c10ef2-1355411679.tcloudbaseapp.com/) |
+
+---
+
+## Roadmap
+
+The subsequent version roadmap will be published after v2.1 goes live. The current cadence is quarterly; v3.0 is tentatively targeted for Q3 and is planned to align with the next stage of the SPZ_2 draft (subject to final release notes).
 
 ---
 
