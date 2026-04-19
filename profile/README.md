@@ -155,7 +155,7 @@ For detailed instructions, please read our [Contributing Guide](https://github.c
 
 ## Contact & Collaboration
 
-- **Organization Email**: 175851233+gugu23456789@users.noreply.github.com
+- **Organization Email**: pjhspz2026@outlook.com
 - **Khronos Specification PR**: [KhronosGroup/glTF#2534](https://github.com/KhronosGroup/glTF/pull/2534)
 - **Maintainer**: [gugu23456789](https://github.com/gugu23456789)
 
