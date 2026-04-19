@@ -156,7 +156,6 @@ For detailed instructions, please read our [Contributing Guide](https://github.c
 ## Contact & Collaboration
 
 - **Organization Email**: pjhspz2026@outlook.com
-- **Khronos Specification PR**: [KhronosGroup/glTF#2534](https://github.com/KhronosGroup/glTF/pull/2534)
 - **Maintainer**: [gugu23456789](https://github.com/gugu23456789)
 
 We actively seek collaboration with industry partners, especially those working in 3D AIGC, digital twin, and real-time rendering fields. If you are interested in becoming a core maintainer or participating in the project, please contact us!
