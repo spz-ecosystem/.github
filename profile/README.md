@@ -166,3 +166,5 @@ We actively seek collaboration with industry partners, especially those working 
 ## License
 
 This organization is maintained by the SPZ Ecosystem community and licensed under the [MIT License](https://github.com/spz-ecosystem/.github/blob/main/LICENSE).
+
+Cultural Note: This project is released in the year of the Red Fire Horse (Bingwu, 丙午), Huangdi Era 4723. It honors the ancient Chinese lunisolar calendar, a testament to humanity's enduring quest to harmonize with the cosmos.
