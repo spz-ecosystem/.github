@@ -109,9 +109,8 @@ A QR-code-based full-chain SPZ/GLB distribution and verification system:
 ---
 
 ## Roadmap
-
-The subsequent version roadmap will be published after v2.1 goes live. The current cadence is quarterly; v3.0 is tentatively targeted for Q3 and is planned to align with the next stage of the SPZ_2 draft (subject to final release notes).
-
+ 
+The subsequent version roadmap will be published after v2.1 goes live. The current release cadence is quarterly. Version 3.0 is tentatively scheduled for Late Summer to Early Autumn of the Bingwu Year (Q3 2026), and is planned to align with the next phase of the SPZ_2 draft specification (subject to the official release notes).
 ---
 
 ## Related Projects
